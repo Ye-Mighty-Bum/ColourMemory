@@ -1,0 +1,360 @@
+html, body {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Quicksand',Verdana,Arial,Helvetica,sans-serif;
+    font-size:14px;
+    line-height: 1.5;
+}
+
+#turnonjs {
+    height: 1px;
+    width: 1px;
+    display: none;
+    position: absolute;
+    text-align:center;
+    background-color: #FFF;
+    border-radius: 40px;
+    line-height: 50px;
+    z-index: -1;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+}
+
+.no-js #board, .no-js .right {
+    display: none !important;
+}
+
+.no-js #turnonjs {
+    width: 400px;
+    height: 200px;
+    display: block;
+    z-index: 5;
+    top: 50%;
+    left: 50%;
+    margin: -100px 0px 0px -200px;
+}
+
+#gameui {
+    width: 700px;
+    height: 556px;
+    background-color: #D5D5D5;
+    padding: 10px;
+    position: relative;
+    /* disable mouse events */
+    /* pointer-events: none; */
+}
+
+#cursor {
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    z-index: 998;
+    transition: all 0.3s;
+    /* background-color: rgba(255,255,255,0.5); */
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+}
+
+#cursor .corner {
+    width: 20px;
+    height: 20px;
+    background: url('../img/bracket.png') no-repeat top right;
+    position: absolute;
+}
+
+#cursor .ne {
+    top: 0;
+    right: 0;
+}
+#cursor .se {
+    transform: rotate(90deg);
+    bottom: 0;
+    right: 0;
+}
+#cursor .sw {
+    transform: rotate(180deg);
+    bottom: 0;
+    left: 0;
+}
+#cursor .nw {
+    transform: rotate(-90deg);
+    top: 0;
+    left: 0;
+}
+
+#gameui .right {
+    width: 180px;
+    height: calc(100% - 20px);
+    background-color: rgba(220,180,50,0.5);
+    padding: 10px;
+    border-radius: 10px;
+    float: right;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+#gameui #board {
+    width: 470px;
+    height: calc(100% - 20px);
+    background-color: rgba(220,180,50,0.5);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    pointer-events: none;
+}
+
+#board .cardrow {
+    width: auto;
+    height: auto;
+    padding: 0px;
+    margin: 0px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+    perspective: 500px;
+}
+
+#board .card {
+    width: auto;
+    height: auto;
+    list-style: none;
+    margin: 5px;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+    cursor: pointer;
+    border-radius: 5px;
+    transform-style: preserve-3d;
+    transition: all 0.6s;
+    flex-grow: 1;
+    position:relative;
+}
+
+#board .card.flipped {
+    transform: rotateY(180deg);
+}
+
+#board .card.hidden {
+    opacity: 0;
+    cursor: default;
+}
+
+#board .card .front, #board .card .back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 5px;
+    backface-visibility: hidden;
+}
+
+#board .card .back {
+    transition: all 0.3s;
+    background-image: url('../img/cardback.png');
+    background-color: #D5D5D5;
+    box-shadow: 0px 0px 0px 3px #FFF inset;
+    transform: rotateY(0deg);
+    z-index: 2;
+}
+
+#board .card:hover .back,
+#board .card.focus .back {
+    background-color: #FFF;
+}
+
+#board .card.focus .brackets {
+    opacity: 1;
+}
+
+#board .card .front {
+    background-color: #FFF;
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#board .card .front .txt {
+    text-align: center;
+    font-size: 20px;
+    text-shadow: 2px 2px #FFF;
+    display: none;
+}
+
+#board .card.hidden .front .txt {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#board .newgame {
+    text-align: center;
+    pointer-events: none;
+}
+
+#board .newgame button {
+    width: 160px;
+    padding: 10px;
+}
+
+#gameui .completed {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+}
+
+#gameui .completed .popup {
+    background-color: rgba(255,255,255,0.7);
+    width: 80%;
+    border-radius: 10px;
+    padding: 10px;
+    margin: -100px auto 0px auto;
+    top: 50%;
+    position: relative;
+    height: 200px;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+    border: 3px solid #FFF;
+    text-align:center;
+    pointer-events: none;
+}
+
+#gameui .completed .popup.insertok {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 50px;
+}
+
+#gameui .completed .popup .msg.err {
+    color: #FF3333;
+    font-weight: bold;
+}
+
+#gameui .completed .popup .loader {
+    background: url('../img/ajax-loader.gif') no-repeat center center transparent;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    z-index: 5;
+    display: inline-block;
+    margin-left: -40px;
+    opacity: 0;
+}
+
+#gameui .completed .popup.sending .loader{
+    opacity: 1;
+}
+
+#gameui .completed .popup label{
+    width: 60px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#gameui .completed .popup input[type=field]{
+    width: 150px;
+}
+
+#gameui .completed .email {
+    margin: 5px 0px 10px 0px;
+}
+
+#gameui .completed .popup button {
+    width: 90px;
+    height: 40px;
+    padding: 10px;
+    margin: 0px 5px;
+}
+
+.right{
+    position: relative;
+}
+
+.right h3 {
+    margin: 15px 0px 5px 0px;
+    border-bottom: 1px solid #333;
+    text-align: right;
+}
+
+#logo {
+    height: 60px;
+    background: url('../img/uglylogo.png') no-repeat center center;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#info .currscore {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #FFF;
+    border-radius: 5px;
+    line-height: 40px;
+    text-align:center;
+}
+
+#info .rank {
+    height: 200px;
+    padding: 5px;
+    background-color: #CFF;
+    border: 3px solid #FFF;
+    border-radius: 5px;
+    overflow-y: scroll;
+}
+
+#info .rank table {
+    width: 100%;
+}
+
+#info .rank table,
+#info .rank table td{
+    padding: 0px;
+    margin: 0px;
+    border-spacing: 0px;
+    font-size: 10px;
+    text-align: center;
+}
+
+#info .rank thead th{
+    background-color: #AAA;
+    padding: 3px;
+}
+
+#info .rank table td:nth-child(1) {
+    text-align: center;
+}
+
+#info .rank table tr.row1 {
+    background-color: #D5D5FF;
+}
+
+.right .cb {
+    text-align: center;
+    font-size: 12px;
+    pointer-events: none;
+}
+
+.right .cb #cbcheck {
+    transform: scale(1.5);
+}
+
+.right .restart {
+    position: absolute;
+    bottom: 10px;
+    height: 40px;
+    pointer-events: none;
+}
+
+.right .restart button{
+    height: 100%;
+    width: 180px;
+    cursor: pointer;
+}
+
+#ref {
+    display: none;
+}

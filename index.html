@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" id="desktop" class="no-js">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <title>Accedo code test - Colour Memory</title>
+    <link rel="icon" type="image/png" href="./img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="./img/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" href="./img/favicon.ico" sizes="32x32" />
+    <link rel="stylesheet" href="./css/_style.css?v=20160230">
+
+    <!-- Set the no-js to js if JS is detected -->
+    <script>
+        document.getElementsByTagName('html')[0].setAttribute('class', 'js');
+    </script>
+</head>
+<body>
+    <div id="gameui">
+        <div id="cursor">
+            <div class="ne corner"></div>
+            <div class="se corner"></div>
+            <div class="sw corner"></div>
+            <div class="nw corner"></div>
+        </div>
+        
+        <div class="right">
+            <div id="logo"></div>
+            <div id="info">
+                <h3>Your Score</h3>
+                <div class="currscore"></div>
+                <h3>Current Rankings</h3>
+                <div class="rank">
+                    <table>
+                        <thead><tr><th>Rank</th><th>Name</th><th>Score</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <h3>Colourblind mode</h3>
+            <div class="cb">
+                <input id="cbcheck" type="checkbox" /><label for="cbcheck">Press 'F1' to toggle</label>
+            </div>
+            <div class="restart">
+                <button type="button">Restart</button>
+            </div>
+        </div>
+        <div id="board"></div>
+
+        <!-- Turn on Your Javascript -->
+        <div id="turnonjs">
+            <h1>You need to turn on Javascript before you can play the game.</h1>
+        </div>
+    </div>
+
+    <!-- templates -->
+    <div id="ref">
+        <ul class="cardrow"></ul>
+        <li class="card">
+            <div class="brackets"></div>
+            <div class="back"></div>
+            <div class="front">
+                <span class="txt"></span>
+            </div>
+        </li>
+        <div class="completed">
+            <div class="popup">
+                <h2>Congratulations! You've completed the game!</h2>
+                <p class="msg">To submit your score, please enter the following:</p>
+                <div class="name">
+                    <label>Name :</label>
+                    <input id="compname" type="field" placeholder="Please enter your name" />
+                </div>
+                <div class="email">
+                    <label>Email :</label>
+                    <input id="compemail" type="field" placeholder="Please enter your email" />
+                </div>
+                <div class="loader"></div>
+                <button class="submit" type="button">Submit Score</button>
+                <button class="cancel" type="button">Cancel</button>
+            </div>
+        </div>
+        <div class="newgame">
+            <!-- p>Difficulty: <select></select></p -->
+            <button type="button">Start New Game</button>
+        </div>
+    </div>
+    
+    <!-- div id="data"></div -->
+    
+    <script src="./js/jquery-2.2.1.min.js"></script>
+    <script src="./js/_script.js?v=20160230"></script>
+</body>
+</html>
